@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D46229BF23DE5762000A8451 /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46229BE23DE5761000A8451 /* Cards.swift */; };
 		D4AB342423DE28CD00D0C770 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB342323DE28CD00D0C770 /* AppDelegate.swift */; };
 		D4AB342623DE28CD00D0C770 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB342523DE28CD00D0C770 /* SceneDelegate.swift */; };
 		D4AB342B23DE28CE00D0C770 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4AB342923DE28CE00D0C770 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D46229BE23DE5761000A8451 /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
 		D4AB342023DE28CD00D0C770 /* PPP-Crypto-Proyect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PPP-Crypto-Proyect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4AB342323DE28CD00D0C770 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4AB342523DE28CD00D0C770 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +43,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D46229BD23DE56E6000A8451 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D46229BE23DE5761000A8451 /* Cards.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D46229C023DE5771000A8451 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D4AB342923DE28CE00D0C770 /* Main.storyboard */,
+				D4AB342E23DE28D100D0C770 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D4AB341723DE28CD00D0C770 = {
 			isa = PBXGroup;
 			children = (
@@ -60,13 +79,13 @@
 		D4AB342223DE28CD00D0C770 /* PPP-Crypto-Proyect */ = {
 			isa = PBXGroup;
 			children = (
+				D46229C023DE5771000A8451 /* View */,
+				D46229BD23DE56E6000A8451 /* Model */,
 				D4AB343A23DE2C8800D0C770 /* Controller */,
 				D4AB343723DE28E000D0C770 /* Utils */,
 				D4AB342323DE28CD00D0C770 /* AppDelegate.swift */,
 				D4AB342523DE28CD00D0C770 /* SceneDelegate.swift */,
-				D4AB342923DE28CE00D0C770 /* Main.storyboard */,
 				D4AB342C23DE28D100D0C770 /* Assets.xcassets */,
-				D4AB342E23DE28D100D0C770 /* LaunchScreen.storyboard */,
 				D4AB343123DE28D100D0C770 /* Info.plist */,
 			);
 			path = "PPP-Crypto-Proyect";
@@ -163,6 +182,7 @@
 				D4AB343923DE290100D0C770 /* Crypto.swift in Sources */,
 				D4AB343E23DE2CBC00D0C770 /* ConfigureViewController.swift in Sources */,
 				D4AB344023DE2EF500D0C770 /* PickPasswordViewController.swift in Sources */,
+				D46229BF23DE5762000A8451 /* Cards.swift in Sources */,
 				D4AB342423DE28CD00D0C770 /* AppDelegate.swift in Sources */,
 				D4AB342623DE28CD00D0C770 /* SceneDelegate.swift in Sources */,
 			);
