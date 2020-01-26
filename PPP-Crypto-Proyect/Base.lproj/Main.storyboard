@@ -17,7 +17,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="dNq-k8-MTd"/>
+                    <navigationItem key="navigationItem" id="dNq-k8-MTd">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="gear" catalog="system" largeContentSizeImage="gear" style="done" id="bIs-oW-Y6m"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -42,4 +44,8 @@
             <point key="canvasLocation" x="137.68115942028987" y="126.5625"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="gear" catalog="system" width="64" height="58"/>
+        <image name="gear" width="16" height="16"/>
+    </resources>
 </document>
