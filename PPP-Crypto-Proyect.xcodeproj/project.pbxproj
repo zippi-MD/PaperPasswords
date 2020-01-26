@@ -9,25 +9,25 @@
 /* Begin PBXBuildFile section */
 		D4AB342423DE28CD00D0C770 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB342323DE28CD00D0C770 /* AppDelegate.swift */; };
 		D4AB342623DE28CD00D0C770 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB342523DE28CD00D0C770 /* SceneDelegate.swift */; };
-		D4AB342823DE28CD00D0C770 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB342723DE28CD00D0C770 /* ViewController.swift */; };
 		D4AB342B23DE28CE00D0C770 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4AB342923DE28CE00D0C770 /* Main.storyboard */; };
 		D4AB342D23DE28D100D0C770 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4AB342C23DE28D100D0C770 /* Assets.xcassets */; };
 		D4AB343023DE28D100D0C770 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4AB342E23DE28D100D0C770 /* LaunchScreen.storyboard */; };
 		D4AB343923DE290100D0C770 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB343823DE290100D0C770 /* Crypto.swift */; };
 		D4AB343E23DE2CBC00D0C770 /* ConfigureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB343D23DE2CBC00D0C770 /* ConfigureViewController.swift */; };
+		D4AB344023DE2EF500D0C770 /* PickPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB343F23DE2EF500D0C770 /* PickPasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D4AB342023DE28CD00D0C770 /* PPP-Crypto-Proyect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PPP-Crypto-Proyect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4AB342323DE28CD00D0C770 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4AB342523DE28CD00D0C770 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D4AB342723DE28CD00D0C770 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D4AB342A23DE28CE00D0C770 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D4AB342C23DE28D100D0C770 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4AB342F23DE28D100D0C770 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D4AB343123DE28D100D0C770 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4AB343823DE290100D0C770 /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		D4AB343D23DE2CBC00D0C770 /* ConfigureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureViewController.swift; sourceTree = "<group>"; };
+		D4AB343F23DE2EF500D0C770 /* PickPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPasswordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +83,8 @@
 		D4AB343A23DE2C8800D0C770 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D4AB342723DE28CD00D0C770 /* ViewController.swift */,
 				D4AB343D23DE2CBC00D0C770 /* ConfigureViewController.swift */,
+				D4AB343F23DE2EF500D0C770 /* PickPasswordViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -162,7 +162,7 @@
 			files = (
 				D4AB343923DE290100D0C770 /* Crypto.swift in Sources */,
 				D4AB343E23DE2CBC00D0C770 /* ConfigureViewController.swift in Sources */,
-				D4AB342823DE28CD00D0C770 /* ViewController.swift in Sources */,
+				D4AB344023DE2EF500D0C770 /* PickPasswordViewController.swift in Sources */,
 				D4AB342423DE28CD00D0C770 /* AppDelegate.swift in Sources */,
 				D4AB342623DE28CD00D0C770 /* SceneDelegate.swift in Sources */,
 			);

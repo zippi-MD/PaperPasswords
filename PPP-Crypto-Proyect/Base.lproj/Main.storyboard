@@ -1,29 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qJg-CU-60V">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qJg-CU-60V">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Paper Passwords-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PPP_Crypto_Proyect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="PickPasswordViewController" customModule="PPP_Crypto_Proyect" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DXI-n0-aCU">
+                                <rect key="frame" x="0.0" y="692" width="414" height="170"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="170" id="Q5J-gN-O95"/>
+                                </constraints>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YmQ-Mx-dql">
+                                <rect key="frame" x="41.5" y="596" width="331" height="46"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <state key="normal" title="Get Password"/>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="XWg-GV-6G3">
+                                <rect key="frame" x="52" y="371" width="310.5" height="150"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="djn-v9-j6e">
+                                        <rect key="frame" x="0.0" y="0.0" width="310.5" height="67.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eoz-Ot-9IF">
+                                                <rect key="frame" x="0.0" y="0.0" width="310.5" height="26.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8zC-rQ-irs">
+                                                <rect key="frame" x="0.0" y="26.5" width="310.5" height="41"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QmJ-fV-ySK">
+                                        <rect key="frame" x="0.0" y="82.5" width="310.5" height="67.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIt-oA-nGg">
+                                                <rect key="frame" x="0.0" y="0.0" width="310.5" height="26.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8jN-YW-X6j">
+                                                <rect key="frame" x="0.0" y="26.5" width="310.5" height="41"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="AXu-z2-IvD"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="YmQ-Mx-dql" firstAttribute="top" secondItem="XWg-GV-6G3" secondAttribute="bottom" constant="75" id="51K-Cd-fEi"/>
+                            <constraint firstItem="DXI-n0-aCU" firstAttribute="top" secondItem="YmQ-Mx-dql" secondAttribute="bottom" constant="50" id="9m8-Wu-IW3"/>
+                            <constraint firstItem="DXI-n0-aCU" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="MBz-t2-VSg"/>
+                            <constraint firstItem="DXI-n0-aCU" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="OnE-HC-gtE"/>
+                            <constraint firstItem="YmQ-Mx-dql" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="a85-vB-0jQ"/>
+                            <constraint firstItem="XWg-GV-6G3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fpG-gh-RV4"/>
+                            <constraint firstItem="YmQ-Mx-dql" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vIy-hi-pF9"/>
+                            <constraint firstItem="DXI-n0-aCU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="yeh-pf-emC"/>
+                            <constraint firstItem="XWg-GV-6G3" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.75" id="zH6-tu-Icm"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="dNq-k8-MTd">
+                    <navigationItem key="navigationItem" title="Paper Passwords" largeTitleDisplayMode="always" id="dNq-k8-MTd">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="gear" catalog="system" largeContentSizeImage="gear" style="done" id="bIs-oW-Y6m">
                             <connections>
                                 <segue destination="Yas-sK-1m4" kind="presentation" id="v0L-aC-m1H"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="getPasswordButton" destination="YmQ-Mx-dql" id="hdf-1e-fyP"/>
+                        <outlet property="passwordPickerView" destination="DXI-n0-aCU" id="x5f-nu-44S"/>
+                        <outlet property="passwordPositionLabel" destination="8zC-rQ-irs" id="z8o-Hf-i6Y"/>
+                        <outlet property="passwordValueLabel" destination="8jN-YW-X6j" id="ByR-Tg-zup"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -36,9 +106,57 @@
                     <view key="view" contentMode="scaleToFill" id="Fqs-IO-PEJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="3e4-Ae-ksP">
+                                <rect key="frame" x="10.5" y="50" width="393" height="208"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="f7G-F0-Ngm">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="96.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sequence Key" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clf-id-6Fb">
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="26.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="p1V-NO-LK7">
+                                                <rect key="frame" x="0.0" y="36.5" width="393" height="60"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGu-Wj-KGE">
+                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="30"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mei-fj-sX2">
+                                                        <rect key="frame" x="0.0" y="30" width="393" height="30"/>
+                                                        <state key="normal" title="Generate Key"/>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kk1-MX-Ckd">
+                                        <rect key="frame" x="0.0" y="111.5" width="393" height="96.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <state key="normal" title="Generate Cards"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="3e4-Ae-ksP" firstAttribute="centerX" secondItem="Fqs-IO-PEJ" secondAttribute="centerX" id="N5C-rV-2A7"/>
+                            <constraint firstItem="3e4-Ae-ksP" firstAttribute="top" secondItem="Rgq-sg-uE8" secondAttribute="top" constant="50" id="X5Z-up-cbo"/>
+                            <constraint firstItem="3e4-Ae-ksP" firstAttribute="width" secondItem="Fqs-IO-PEJ" secondAttribute="width" multiplier="0.95" id="f1h-NU-XBQ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Rgq-sg-uE8"/>
                     </view>
+                    <connections>
+                        <outlet property="generateCardsButton" destination="Kk1-MX-Ckd" id="UP3-hJ-mjL"/>
+                        <outlet property="generateSequenceKeyButton" destination="Mei-fj-sX2" id="9ZT-ZH-PVx"/>
+                        <outlet property="sequenceKeyLabel" destination="ZGu-Wj-KGE" id="5HA-A1-2q3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TP3-jT-d76" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -65,6 +183,5 @@
     </scenes>
     <resources>
         <image name="gear" catalog="system" width="64" height="58"/>
-        <image name="gear" width="16" height="16"/>
     </resources>
 </document>
