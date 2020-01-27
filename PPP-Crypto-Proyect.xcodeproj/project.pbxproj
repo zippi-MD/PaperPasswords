@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D46229BF23DE5762000A8451 /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46229BE23DE5761000A8451 /* Cards.swift */; };
+		D48DA7F123DE8A1200280C3F /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48DA7F023DE8A1200280C3F /* Alerts.swift */; };
+		D48DA7F323DE8B7800280C3F /* CharacterSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48DA7F223DE8B7800280C3F /* CharacterSet.swift */; };
 		D4AB342423DE28CD00D0C770 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB342323DE28CD00D0C770 /* AppDelegate.swift */; };
 		D4AB342623DE28CD00D0C770 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AB342523DE28CD00D0C770 /* SceneDelegate.swift */; };
 		D4AB342B23DE28CE00D0C770 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4AB342923DE28CE00D0C770 /* Main.storyboard */; };
@@ -20,6 +22,8 @@
 
 /* Begin PBXFileReference section */
 		D46229BE23DE5761000A8451 /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
+		D48DA7F023DE8A1200280C3F /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		D48DA7F223DE8B7800280C3F /* CharacterSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSet.swift; sourceTree = "<group>"; };
 		D4AB342023DE28CD00D0C770 /* PPP-Crypto-Proyect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PPP-Crypto-Proyect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4AB342323DE28CD00D0C770 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4AB342523DE28CD00D0C770 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +99,8 @@
 			isa = PBXGroup;
 			children = (
 				D4AB343823DE290100D0C770 /* Crypto.swift */,
+				D48DA7F023DE8A1200280C3F /* Alerts.swift */,
+				D48DA7F223DE8B7800280C3F /* CharacterSet.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -184,6 +190,8 @@
 				D4AB344023DE2EF500D0C770 /* PickPasswordViewController.swift in Sources */,
 				D46229BF23DE5762000A8451 /* Cards.swift in Sources */,
 				D4AB342423DE28CD00D0C770 /* AppDelegate.swift in Sources */,
+				D48DA7F123DE8A1200280C3F /* Alerts.swift in Sources */,
+				D48DA7F323DE8B7800280C3F /* CharacterSet.swift in Sources */,
 				D4AB342623DE28CD00D0C770 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
