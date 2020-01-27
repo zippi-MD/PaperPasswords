@@ -18,11 +18,30 @@ class ConfigureViewController: UIViewController {
     @IBOutlet weak var passwordLength: UILabel!
     @IBOutlet weak var numberOfCardsLabel: UILabel!
     
-    var sequenceKey: SymmetricKey?
-    var passcodeLength: Int = 4
-    var numberOfCards: Int = 3
+    var sequenceKey: SymmetricKey? {
+        willSet {
+            if let key = newValue {
+                sequenceKeyLabel.text = getStringForKey(key)
+            }
+        }
+    }
+    var passcodeLength: Int = 4 {
+        willSet {
+            passwordLength.text = "\(newValue)"
+        }
+    }
+    var numberOfCards: Int = 3 {
+        willSet {
+            numberOfCardsLabel.text = "\(newValue)"
+        }
+    }
     
     let suggestedPasswordCharacterSet = "!#%+23456789:=?@ABCDEFGHJKLMNPRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+    
+    let sequenceKeyKeychainKey = "SequenceKey"
+    let passwordCharacterSetKey = "characterSetKey"
+    let passwordLengthKey = "passcodedLengthKey"
+    let numberOfCardsKey = "numberOfCardsKey"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,24 +51,37 @@ class ConfigureViewController: UIViewController {
     
     func setupUI(){
         passwordCharacterSetTextView.text = suggestedPasswordCharacterSet
+        
+        if let keyBase64 = KeychainWrapper.standard.string(forKey: sequenceKeyKeychainKey), let storedKey = getKeyFromBase64String(keyBase64) {
+            sequenceKey = storedKey
+        }
+        
+        let userDefaults = UserDefaults.standard
+        
+        if let storedCharacterSet = userDefaults.array(forKey: passwordCharacterSetKey) as? [String] {
+            passwordCharacterSetTextView.text = storedCharacterSet.joined()
+        }
+        
+        let storedPasscodeLength = userDefaults.integer(forKey: passwordLengthKey)
+        passcodeLength = storedPasscodeLength > 0 ? storedPasscodeLength : 4
+        
+        let storedNumberOfCards = userDefaults.integer(forKey: numberOfCardsKey)
+        numberOfCards = storedNumberOfCards > 0 ? storedNumberOfCards : 4
+        
     }
     
 
     @IBAction func generateKeyTapped(_ sender: UIButton) {
-        sequenceKey = generateSequenceKey()
-        sequenceKeyLabel.text = sequenceKey?.withUnsafeBytes { Data(Array($0)).base64EncodedString() }
+        let newKey = generateSequenceKey()
+        sequenceKey = newKey
     }
     
     @IBAction func changePasswordLengthTapped(_ sender: UIStepper) {
-        let length = Int(sender.value)
-        passwordLength.text = "\(length)"
-        passcodeLength = length
+        passcodeLength = Int(sender.value)
     }
     
     @IBAction func changeNumberOfCardsToGenerate(_ sender: UIStepper) {
-        let senderNumberOfCards = Int(sender.value)
-        numberOfCards = senderNumberOfCards
-        numberOfCardsLabel.text = "\(numberOfCards)"
+        numberOfCards = Int(sender.value)
     }
     
     
@@ -64,6 +96,13 @@ class ConfigureViewController: UIViewController {
             present(createSimpleErrorAlertWith(message: "The character set is not valid"), animated: true)
             return
         }
+        
+        let keyDataBase64 = getStringForKey(key)
+        KeychainWrapper.standard.set(keyDataBase64, forKey: sequenceKeyKeychainKey)
+        
+        UserDefaults.standard.set(passcodeLength, forKey: passwordLengthKey)
+        UserDefaults.standard.set(numberOfCards, forKey: numberOfCardsKey)
+        UserDefaults.standard.set(characterArray, forKey: passwordCharacterSetKey)
         
         Cards.sharedInstance.generateCards(sequenceKey: key, passcodeCharacterSet: characterArray, passcodeLenght: passcodeLength, numberOfCards: numberOfCards)
     }

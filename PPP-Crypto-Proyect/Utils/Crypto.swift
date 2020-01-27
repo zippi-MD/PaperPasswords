@@ -28,3 +28,14 @@ func get128bitCounterDataFrom(_ value: UInt) -> Data {
     return Data(counter.utf8)
     
 }
+
+func getStringForKey(_ key: SymmetricKey) -> String {
+    key.withUnsafeBytes { Data(Array($0)).base64EncodedString() }
+}
+
+func getKeyFromBase64String(_ base64Key: String) -> SymmetricKey? {
+    if let keyData = Data(base64Encoded: base64Key) {
+        return SymmetricKey(data: keyData)
+    }
+    return nil
+}
