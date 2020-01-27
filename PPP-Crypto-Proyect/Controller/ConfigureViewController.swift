@@ -84,6 +84,9 @@ class ConfigureViewController: UIViewController {
         numberOfCards = Int(sender.value)
     }
     
+    @IBAction func restoreSuggestedCharacterSet(_ sender: Any) {
+        passwordCharacterSetTextView.text = suggestedPasswordCharacterSet
+    }
     
     @IBAction func generateCardsTapped(_ sender: UIButton) {
         
