@@ -17,6 +17,8 @@ class ConfigureViewController: UIViewController {
     @IBOutlet weak var passwordCharacterSetTextView: UITextView!
     @IBOutlet weak var passwordLength: UILabel!
     @IBOutlet weak var numberOfCardsLabel: UILabel!
+    @IBOutlet weak var passwordLengthStepper: UIStepper!
+    @IBOutlet weak var numberOfCardsStepper: UIStepper!
     
     var sequenceKey: SymmetricKey? {
         willSet {
@@ -28,11 +30,13 @@ class ConfigureViewController: UIViewController {
     var passcodeLength: Int = 4 {
         willSet {
             passwordLength.text = "\(newValue)"
+            passwordLengthStepper.value = Double(newValue)
         }
     }
     var numberOfCards: Int = 3 {
         willSet {
             numberOfCardsLabel.text = "\(newValue)"
+            numberOfCardsStepper.value = Double(newValue)
         }
     }
     
@@ -100,6 +104,8 @@ class ConfigureViewController: UIViewController {
             return
         }
         
+        generateCardsButton.isEnabled = false
+        
         let keyDataBase64 = getStringForKey(key)
         KeychainWrapper.standard.set(keyDataBase64, forKey: sequenceKeyKeychainKey)
         
@@ -108,6 +114,8 @@ class ConfigureViewController: UIViewController {
         UserDefaults.standard.set(characterArray, forKey: passwordCharacterSetKey)
         
         Cards.sharedInstance.generateCards(sequenceKey: key, passcodeCharacterSet: characterArray, passcodeLenght: passcodeLength, numberOfCards: numberOfCards)
+        
+        navigationController?.popViewController(animated: true)
     }
     
     

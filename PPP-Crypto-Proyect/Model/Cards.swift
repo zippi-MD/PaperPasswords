@@ -9,6 +9,12 @@
 import UIKit
 import CryptoKit
 
+enum StoredCards {
+    case NoStoredCards
+    case StoredCards
+    case CardsToStore
+}
+
 class Cards {
     
     static let sharedInstance = Cards()
@@ -17,8 +23,8 @@ class Cards {
     private var passcodeLenght: Int?
     private var numberOfCards: Int?
     private var actualCounterValue: UInt = 0
-    private var numberOfRows: Int = 10
-    private var columns: [String] = ["A", "B", "C", "D", "E", "F", "G"]
+    var numberOfRows: Int = 10
+    var columns: [String] = ["A", "B", "C", "D", "E", "F", "G"]
     
     var cards: [ [String: [String]] ]?
     

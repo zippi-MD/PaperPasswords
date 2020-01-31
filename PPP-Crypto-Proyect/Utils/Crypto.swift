@@ -39,3 +39,45 @@ func getKeyFromBase64String(_ base64Key: String) -> SymmetricKey? {
     }
     return nil
 }
+
+
+func decryptCardsFrom(_ base64Cards: String, with pin: String) -> [[String: [String]]]? {
+    guard let pinData = pin.data(using: .utf8) else { return nil}
+    
+    let hashedPin = SHA256.hash(data: pinData)
+    let key = SymmetricKey(data: hashedPin)
+    
+    let jsonDecoder = JSONDecoder()
+    
+    if  let cardsData = Data(base64Encoded: base64Cards),
+        let sealedBox = try? AES.GCM.SealedBox(combined: cardsData),
+        let decryptedData = try? AES.GCM.open(sealedBox, using: key),
+        let decodedCards = try? jsonDecoder.decode([[String: [String]]].self, from: decryptedData){
+
+        return decodedCards
+        
+    }
+    else {
+        return nil
+    }
+}
+
+func cypherCardsFrom(_ cards: [[String: [String]]], with pin: String) -> String? {
+    guard let pinData = pin.data(using: .utf8) else { return nil}
+    
+    let hashedPin = SHA256.hash(data: pinData)
+    let key = SymmetricKey(data: hashedPin)
+    
+    let jsonEncoder = JSONEncoder()
+    
+    if  let jsconCardsData = try? jsonEncoder.encode(cards),
+        let sealedCards = try? AES.GCM.seal(jsconCardsData, using: key),
+        let combinedData = sealedCards.combined {
+        
+        return combinedData.base64EncodedString()
+    }
+    else {
+        return nil
+    }
+    
+}
