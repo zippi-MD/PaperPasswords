@@ -66,12 +66,7 @@ class Cards {
         }
         
         let simplified128Counter = ([UInt8](cypheredCounter.ciphertext)).map { value -> String in
-            if (0..<127).contains(value){
-                return "0"
-            }
-            else {
-                return "1"
-            }
+            return (0..<127).contains(value) ? "0" : "1"
         }
         
         return Array(simplified128Counter[0..<(simplified128Counter.count/2)]).joined()
@@ -84,8 +79,8 @@ class Cards {
         for _ in 0..<passwordLength {
             
             let ciphered128BitCounter = getCypheredCounter128Bit(using: key) ?? " "
-            let cipheredCounterValue = strtoul(ciphered128BitCounter, nil, 2)
-            let characterToAssign = cipheredCounterValue % UInt(characterSet.count)
+            let ciphered128CounterValue = try! UInt128("0b"+ciphered128BitCounter)
+            let characterToAssign = ciphered128CounterValue % UInt128(characterSet.count)
             let characterIndex = Int(characterToAssign)
             cell = cell + characterSet[characterIndex]
         }
