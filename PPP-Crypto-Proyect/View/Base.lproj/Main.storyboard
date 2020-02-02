@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qJg-CU-60V">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -69,25 +69,39 @@
                                     <constraint firstAttribute="height" constant="150" id="AXu-z2-IvD"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oA4-n6-cML">
-                                <rect key="frame" x="112.5" y="425" width="189" height="46"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="Generate Cards"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVE-rP-66v">
+                                <rect key="frame" x="358" y="52" width="36" height="34.5"/>
+                                <state key="normal" image="gear" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                    </preferredSymbolConfiguration>
+                                </state>
                                 <connections>
-                                    <segue destination="Yas-sK-1m4" kind="show" id="FEV-DM-HNx"/>
+                                    <segue destination="Yas-sK-1m4" kind="presentation" id="Fvr-di-ZVL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5p-ek-Gyq">
+                                <rect key="frame" x="20" y="52" width="64" height="39"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="saveRestoreButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8mP-nH-9wi"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="h5p-ek-Gyq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="1MT-1c-DQt"/>
+                            <constraint firstItem="h5p-ek-Gyq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="1yi-09-7PE"/>
                             <constraint firstItem="YmQ-Mx-dql" firstAttribute="top" secondItem="XWg-GV-6G3" secondAttribute="bottom" constant="75" id="51K-Cd-fEi"/>
                             <constraint firstItem="DXI-n0-aCU" firstAttribute="top" secondItem="YmQ-Mx-dql" secondAttribute="bottom" constant="50" id="9m8-Wu-IW3"/>
                             <constraint firstItem="DXI-n0-aCU" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="MBz-t2-VSg"/>
                             <constraint firstItem="DXI-n0-aCU" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="OnE-HC-gtE"/>
                             <constraint firstItem="YmQ-Mx-dql" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="a85-vB-0jQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JVE-rP-66v" secondAttribute="trailing" constant="20" id="eRM-k0-814"/>
                             <constraint firstItem="XWg-GV-6G3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fpG-gh-RV4"/>
-                            <constraint firstItem="oA4-n6-cML" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="htM-lY-9ni"/>
-                            <constraint firstItem="oA4-n6-cML" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="lIV-eM-Cz4"/>
+                            <constraint firstItem="JVE-rP-66v" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="jFh-bN-DJd"/>
+                            <constraint firstItem="JVE-rP-66v" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="h5p-ek-Gyq" secondAttribute="trailing" constant="20" id="qJq-9k-AI6"/>
                             <constraint firstItem="YmQ-Mx-dql" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vIy-hi-pF9"/>
                             <constraint firstItem="DXI-n0-aCU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="yeh-pf-emC"/>
                             <constraint firstItem="XWg-GV-6G3" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.75" id="zH6-tu-Icm"/>
@@ -95,25 +109,16 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Paper Passwords" largeTitleDisplayMode="always" id="dNq-k8-MTd">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="Dh8-Co-OKz">
-                            <connections>
-                                <action selector="saveRestoreButtonTapped:" destination="BYZ-38-t0r" id="VpM-X9-fIT"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="gear" catalog="system" largeContentSizeImage="gear" style="done" id="bIs-oW-Y6m">
-                            <connections>
-                                <segue destination="Yas-sK-1m4" kind="show" id="v0L-aC-m1H"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="Dh8-Co-OKz"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="gear" catalog="system" largeContentSizeImage="gear" style="done" id="bIs-oW-Y6m"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="generateCardsButton" destination="oA4-n6-cML" id="3Iu-7H-dh7"/>
                         <outlet property="getPasswordButton" destination="YmQ-Mx-dql" id="hdf-1e-fyP"/>
                         <outlet property="passwordContainerStackView" destination="XWg-GV-6G3" id="8SJ-It-OyC"/>
                         <outlet property="passwordPickerView" destination="DXI-n0-aCU" id="x5f-nu-44S"/>
                         <outlet property="passwordPositionLabel" destination="8zC-rQ-irs" id="z8o-Hf-i6Y"/>
                         <outlet property="passwordValueLabel" destination="8jN-YW-X6j" id="ByR-Tg-zup"/>
-                        <outlet property="saveRestoreButton" destination="Dh8-Co-OKz" id="f9j-6m-2wK"/>
+                        <outlet property="saveRestoreButton" destination="h5p-ek-Gyq" id="h0n-O2-cVM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -125,17 +130,23 @@
             <objects>
                 <viewController id="Yas-sK-1m4" customClass="ConfigureViewController" customModule="PPP_Crypto_Proyect" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fqs-IO-PEJ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="946"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yGI-0F-rPZ">
-                                <rect key="frame" x="0.0" y="88" width="600" height="892"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="926"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="3e4-Ae-ksP">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="854.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="900.5"/>
                                         <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Configuration" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcr-q0-iSU">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="45"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="f7G-F0-Ngm">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="260"/>
+                                                <rect key="frame" x="0.0" y="46" width="600" height="260"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sequence Key" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clf-id-6Fb">
                                                         <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
@@ -167,7 +178,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="44" translatesAutoresizingMaskIntoConstraints="NO" id="4cF-Fw-R4Q">
-                                                <rect key="frame" x="0.0" y="261" width="600" height="270.5"/>
+                                                <rect key="frame" x="0.0" y="307" width="600" height="270.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passcode character set:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ufy-vu-EiZ">
                                                         <rect key="frame" x="0.0" y="0.0" width="600" height="26.5"/>
@@ -200,7 +211,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0Kq-un-1vq">
-                                                <rect key="frame" x="0.0" y="532.5" width="600" height="110"/>
+                                                <rect key="frame" x="0.0" y="578.5" width="600" height="110"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passcode length:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="95z-oS-jHr">
                                                         <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
@@ -236,7 +247,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SS6-bA-r43">
-                                                <rect key="frame" x="0.0" y="643.5" width="600" height="110"/>
+                                                <rect key="frame" x="0.0" y="689.5" width="600" height="110"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Cards:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rDZ-p0-gf9">
                                                         <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
@@ -272,7 +283,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kk1-MX-Ckd">
-                                                <rect key="frame" x="0.0" y="754.5" width="600" height="100"/>
+                                                <rect key="frame" x="0.0" y="800.5" width="600" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="SEt-Zh-vab"/>
                                                 </constraints>
@@ -320,31 +331,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TP3-jT-d76" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2115.9420289855075" y="120.53571428571428"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Kih-Qc-xXc">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qJg-CU-60V" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SsS-B0-Lb2">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="QFV-yB-EQ9"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uwT-Zo-ZLb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="126.5625"/>
+            <point key="canvasLocation" x="2020" y="127"/>
         </scene>
     </scenes>
     <resources>
         <image name="gear" catalog="system" width="64" height="58"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="v0L-aC-m1H"/>
-    </inferredMetricsTieBreakers>
 </document>
