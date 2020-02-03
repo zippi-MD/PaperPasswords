@@ -23,7 +23,7 @@ class PickPasswordViewController: UIViewController {
     @IBOutlet weak var passwordContainerStackView: UIStackView!
     @IBOutlet weak var saveRestoreButton: UIButton!
     
-    let cardsManager = Cards.sharedInstance
+    let cardsManager: CardsManager = CardsManager.sharedInstance
     
     var selectedCard = 0
     var selectedColumn = "A"
@@ -39,6 +39,47 @@ class PickPasswordViewController: UIViewController {
         super.viewDidLoad()
         passwordPickerView.dataSource = self
         passwordPickerView.delegate = self
+        cardsManager.passwordPicker = self
+        
+        updateSaveRestoreButtonTo(cardsManager.storedCardsState)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if cardsManager.cards == nil {
+            askToGenerateOrRestoreCards()
+        }
+        
+    }
+    
+    private func askToGenerateOrRestoreCards() {
+        let alert = UIAlertController(title: "No cards", message: "You don't have cards, please restore or generate ones", preferredStyle: .alert)
+        let generateAction = UIAlertAction(title: "Generate", style: .default) { [unowned self] (_) in
+            self.performSegue(withIdentifier: "toGenerateCards", sender: nil)
+        }
+        
+        alert.addAction(generateAction)
+        
+        if cardsManager.storedCardsState == .StoredCards {
+            let restoreCardsAction = UIAlertAction(title: "Restore", style: .default) { [unowned self](_) in
+                self.saveRestoreButtonTapped(nil)
+            }
+            alert.addAction(restoreCardsAction)
+        }
+        
+        present(alert, animated: true)
+    }
+    
+    func reloadData(){
+        if let _ = cardsManager.cards {
+            passwordPickerView.reloadAllComponents()
+            selectedPassword = SelectedPassword(card: selectedCard, column: selectedColumn, row: selectedRow)
+            updateSaveRestoreButtonTo(cardsManager.storedCardsState)
+        }
+        else {
+            askToGenerateOrRestoreCards()
+        }
     }
     
     @IBAction func getPasswordTapped(_ sender: UIButton) {
@@ -56,13 +97,69 @@ class PickPasswordViewController: UIViewController {
         
     }
     
-    @IBAction func saveRestoreButtonTapped(_ sender: Any) {
-        
+    @IBAction func saveRestoreButtonTapped(_ sender: Any?) {
+        switch cardsManager.storedCardsState {
+        case .NoStoredCards:
+            return
+            
+        case .CardsToStore:
+            let alertUserPassword = UIAlertController(title: "PIN", message: "Write a pin to encrypt your cards", preferredStyle: .alert)
+            alertUserPassword.addTextField()
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            let encriptAction = UIAlertAction(title: "Encrypt", style: .default) { [unowned self] (_) in
+                guard let alertTextField = alertUserPassword.textFields?[0], let userPin = alertTextField.text else { return }
+                
+                DispatchQueue.global(qos: .background).async {
+                    self.cardsManager.storeCardsWithPin(userPin)
+                }
+            }
+            alertUserPassword.addAction(cancelAction)
+            alertUserPassword.addAction(encriptAction)
+            present(alertUserPassword, animated: true)
+            
+        case .StoredCards:
+            let alertUserPassword = UIAlertController(title: "PIN", message: "Write your pin to decrypt your cards", preferredStyle: .alert)
+            alertUserPassword.addTextField()
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            let decriptAction = UIAlertAction(title: "Decrypt", style: .default) { [unowned self] (_) in
+                guard let alertTextField = alertUserPassword.textFields?[0], let userPin = alertTextField.text else { return }
+                self.cardsManager.recoverCardsWithPin(userPin)
+            }
+            alertUserPassword.addAction(cancelAction)
+            alertUserPassword.addAction(decriptAction)
+            
+            present(alertUserPassword, animated: true)
+        }
     }
     
     
     
     
+}
+
+//MARK: Navigation
+extension PickPasswordViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let configureViewController = segue.destination as? ConfigureViewController {
+            configureViewController.pickPasswordViewController = self
+        }
+    }
+}
+
+//MARK: UI
+extension PickPasswordViewController {
+    private func updateSaveRestoreButtonTo(_ state: StoredCards){
+        switch state {
+        case .NoStoredCards:
+            saveRestoreButton.setTitle("", for: .normal)
+        case .CardsToStore:
+            saveRestoreButton.setTitle("Save Cards", for: .normal)
+        case .StoredCards:
+            saveRestoreButton.setTitle("Restore Cards", for: .normal)
+        }
+    }
 }
 
 //MARK: Picker DataSource
@@ -100,9 +197,9 @@ extension PickPasswordViewController: UIPickerViewDataSource {
         case .Cards:
             return cards.count
         case .Columns:
-            return Cards.sharedInstance.columns.count
+            return CardsManager.sharedInstance.columns.count
         case .Rows:
-            return Cards.sharedInstance.numberOfRows
+            return CardsManager.sharedInstance.numberOfRows
         }
     }
       
@@ -135,7 +232,7 @@ extension PickPasswordViewController: UIPickerViewDelegate {
         case .Cards:
             selectedCard = row
         case .Columns:
-            selectedColumn = Cards.sharedInstance.columns[row]
+            selectedColumn = CardsManager.sharedInstance.columns[row]
         case .Rows:
             selectedRow = row
         }
@@ -148,5 +245,32 @@ extension PickPasswordViewController: UIPickerViewDelegate {
     
 }
 
-
+//MARK: PasswordPicker Delegate
+extension PickPasswordViewController: PasswordPickerDelegate {
+    func didFinishStoringCards(success: Bool) {
+        let alertMessage: String
+        alertMessage = success ? "The cards were stored successfully" : "An error ocurred while storing the cards"
+        
+        let alert = createSimpleSuccessAlertWith(message: alertMessage)
+        
+        DispatchQueue.main.async {
+            [unowned self] in
+            self.present(alert, animated: true)
+        }
+        
+    }
+    
+    func didFinishDecryptingCards(success: Bool) {
+        let alertMessage: String
+        alertMessage = success ? "Cards decrypted successfully" : "Wrong pin"
+        
+        let alert = UIAlertController(title: "Decrypting", message: alertMessage, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default) { [unowned self] (_) in
+            self.reloadData()
+        }
+        
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+}
 
