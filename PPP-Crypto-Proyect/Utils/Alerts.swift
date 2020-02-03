@@ -17,8 +17,9 @@ func createSimpleErrorAlertWith(message: String) -> UIAlertController {
     return ac
 }
 
-func createSimpleErrorAlertWith(message: String, completion: ()->Void) -> UIAlertController {
-    let ac = UIAlertController(title: "Ups :/", message: message, preferredStyle: .alert)
+
+func createSimpleSuccessAlertWith(message: String) -> UIAlertController {
+    let ac = UIAlertController(title: "Yei :)", message: message, preferredStyle: .alert)
     let action = UIAlertAction(title: "Ok", style: .default)
     
     ac.addAction(action)
