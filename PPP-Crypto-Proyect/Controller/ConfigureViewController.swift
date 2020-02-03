@@ -7,24 +7,27 @@
 //
 
 import UIKit
-import CryptoKit
 
 class ConfigureViewController: UIViewController {
 
     @IBOutlet weak var sequenceKeyLabel: UILabel!
     @IBOutlet weak var generateSequenceKeyButton: UIButton!
+    @IBOutlet weak var setSuggestedCharacterSetButton: UIButton!
     @IBOutlet weak var generateCardsButton: UIButton!
     @IBOutlet weak var passwordCharacterSetTextView: UITextView!
     @IBOutlet weak var passwordLength: UILabel!
     @IBOutlet weak var numberOfCardsLabel: UILabel!
     @IBOutlet weak var passwordLengthStepper: UIStepper!
     @IBOutlet weak var numberOfCardsStepper: UIStepper!
+    @IBOutlet weak var backgroundScrollView: UIScrollView!
     
-    var sequenceKey: SymmetricKey? {
+    weak var pickPasswordViewController: PickPasswordViewController?
+    
+    var cardsManager: CardsManager = CardsManager.sharedInstance
+    
+    var sequenceKey: String? {
         willSet {
-            if let key = newValue {
-                sequenceKeyLabel.text = getStringForKey(key)
-            }
+            sequenceKeyLabel.text = newValue
         }
     }
     var passcodeLength: Int = 4 {
@@ -40,44 +43,26 @@ class ConfigureViewController: UIViewController {
         }
     }
     
-    let suggestedPasswordCharacterSet = "!#%+23456789:=?@ABCDEFGHJKLMNPRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
-    
-    let sequenceKeyKeychainKey = "SequenceKey"
-    let passwordCharacterSetKey = "characterSetKey"
-    let passwordLengthKey = "passcodedLengthKey"
-    let numberOfCardsKey = "numberOfCardsKey"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupUI()
+        cardsManager.cardsConfigurator = self
     }
     
-    func setupUI(){
-        passwordCharacterSetTextView.text = suggestedPasswordCharacterSet
-        
-        if let keyBase64 = KeychainWrapper.standard.string(forKey: sequenceKeyKeychainKey), let storedKey = getKeyFromBase64String(keyBase64) {
-            sequenceKey = storedKey
-        }
-        
-        let userDefaults = UserDefaults.standard
-        
-        if let storedCharacterSet = userDefaults.array(forKey: passwordCharacterSetKey) as? [String] {
-            passwordCharacterSetTextView.text = storedCharacterSet.joined()
-        }
-        
-        let storedPasscodeLength = userDefaults.integer(forKey: passwordLengthKey)
-        passcodeLength = storedPasscodeLength > 0 ? storedPasscodeLength : 4
-        
-        let storedNumberOfCards = userDefaults.integer(forKey: numberOfCardsKey)
-        numberOfCards = storedNumberOfCards > 0 ? storedNumberOfCards : 4
-        
+    override func viewWillAppear(_ animated: Bool) {
+        passcodeLength = cardsManager.passcodeLength
+        numberOfCards = cardsManager.numberOfCards
+        sequenceKey = cardsManager.sequenceSymmetricKey
+        passwordCharacterSetTextView.text = cardsManager.suggestedPasswordCharacters
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        pickPasswordViewController?.reloadData()
     }
     
 
     @IBAction func generateKeyTapped(_ sender: UIButton) {
-        let newKey = generateSequenceKey()
-        sequenceKey = newKey
+        sequenceKey = cardsManager.getNewSequenceKey()
     }
     
     @IBAction func changePasswordLengthTapped(_ sender: UIStepper) {
@@ -89,15 +74,10 @@ class ConfigureViewController: UIViewController {
     }
     
     @IBAction func restoreSuggestedCharacterSet(_ sender: Any) {
-        passwordCharacterSetTextView.text = suggestedPasswordCharacterSet
+        passwordCharacterSetTextView.text = cardsManager.suggestedPasswordCharacters
     }
     
     @IBAction func generateCardsTapped(_ sender: UIButton) {
-        
-        guard let key = sequenceKey else {
-            present(createSimpleErrorAlertWith(message: "You need to generate a key first"), animated: true)
-            return
-        }
         
         guard let characterArray = getCharacterArrayFrom(passwordCharacterSetTextView.text) else {
             present(createSimpleErrorAlertWith(message: "The character set is not valid"), animated: true)
@@ -105,19 +85,48 @@ class ConfigureViewController: UIViewController {
         }
         
         generateCardsButton.isEnabled = false
+        numberOfCardsStepper.isEnabled = false
+        passwordLengthStepper.isEnabled = false
+        generateSequenceKeyButton.isEnabled = false
+        setSuggestedCharacterSetButton.isEnabled = false
         
-        let keyDataBase64 = getStringForKey(key)
-        KeychainWrapper.standard.set(keyDataBase64, forKey: sequenceKeyKeychainKey)
+        backgroundScrollView.contentInsetAdjustmentBehavior = .never
         
-        UserDefaults.standard.set(passcodeLength, forKey: passwordLengthKey)
-        UserDefaults.standard.set(numberOfCards, forKey: numberOfCardsKey)
-        UserDefaults.standard.set(characterArray, forKey: passwordCharacterSetKey)
+        self.isModalInPresentation = true
+                
+        let numberOfCards = Int(numberOfCardsStepper.value)
+        let passcodeLength = Int(passwordLengthStepper.value)
+        let newConfiguration = CardsConfiguration(numberOfCards: numberOfCards, passcodeLength: passcodeLength, characterSet: characterArray)
         
-        Cards.sharedInstance.generateCards(sequenceKey: key, passcodeCharacterSet: characterArray, passcodeLenght: passcodeLength, numberOfCards: numberOfCards)
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = .black
+        activityIndicator.center = self.view.center
+        activityIndicator.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleTopMargin, .flexibleBottomMargin]
+        activityIndicator.startAnimating()
+        self.view.addSubview(activityIndicator)
         
-        navigationController?.popViewController(animated: true)
+        DispatchQueue.global(qos: .userInitiated).async {
+            CardsManager.sharedInstance.generateCards(configuration: newConfiguration)
+        }
+        
     }
     
+    
+    
+}
+
+
+extension ConfigureViewController: CardsConfiguratorDelegate {
+    func didFinishedGeneratingCards() {
+        DispatchQueue.main.async {
+            [unowned self] in
+            self.dismiss(animated: true) {
+                [unowned self] in
+                self.pickPasswordViewController?.reloadData()
+            }
+        }
+        
+    }
     
     
 }
