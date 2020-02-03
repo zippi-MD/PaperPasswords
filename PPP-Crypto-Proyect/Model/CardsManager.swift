@@ -17,7 +17,7 @@ enum StoredCards {
 
 typealias Card = [String: [String]]
 
-protocol CardManagerDelegate {
+protocol CardsManagerDelegate {
     var numberOfCards: Int { get }
     var numberOfRows: Int { get }
     var columns: [String] { get }
@@ -30,10 +30,19 @@ protocol CardManagerDelegate {
     func generateCards(configuration: CardsConfiguration?)
     func getNewSequenceKey() -> String
     func storeCardsWithPin(_ pin: String)
-    func recoverCardsWithPin(_ pin: String) -> Bool
+    func recoverCardsWithPin(_ pin: String)
 }
 
-class CardsManager: CardManagerDelegate {
+protocol CardsConfiguratorDelegate: class {
+    func didFinishedGeneratingCards()
+}
+
+protocol PasswordPickerDelegate: class {
+    func didFinishStoringCards(success: Bool)
+    func didFinishDecryptingCards(success: Bool)
+}
+
+class CardsManager: CardsManagerDelegate {
     
     static let sharedInstance = CardsManager()
     
@@ -49,6 +58,9 @@ class CardsManager: CardManagerDelegate {
     
     let suggestedPasswordCharacters = "!#%+23456789:=?@ABCDEFGHJKLMNPRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 
+    weak var cardsConfigurator: CardsConfiguratorDelegate?
+    weak var passwordPicker: PasswordPickerDelegate?
+    
     var numberOfCards: Int {
         get { cardsConfiguration.numberOfCards }
     }
@@ -129,6 +141,7 @@ class CardsManager: CardManagerDelegate {
         
         storedCardsState = .CardsToStore
         saveUserCardsConfiguration()
+        cardsConfigurator?.didFinishedGeneratingCards()
     }
     
     func getNewSequenceKey() -> String {
@@ -137,24 +150,33 @@ class CardsManager: CardManagerDelegate {
         return getStringForKey(newKey)
     }
     
-    func storeCardsWithPin(_ pin: String) {
-        guard let cardsToStore = self.cards else { return }
+    func storeCardsWithPin(_ pin: String){
+        guard let cardsToStore = self.cards else {
+            passwordPicker?.didFinishStoringCards(success: false)
+            return
+        }
         if let cipheredCardsBase64 = cypherCardsFrom(cardsToStore, with: pin){
             storeCardsIntoDocuments(cipheredCardsBase64)
             self.storedCardsState = .NoStoredCards
+            passwordPicker?.didFinishStoringCards(success: true)
+            return
         }
-        
+        passwordPicker?.didFinishStoringCards(success: false)
     }
     
-    func recoverCardsWithPin(_ pin: String) -> Bool {
-        guard let storedCards = self.storedEncryptedCards else { return false }
+    func recoverCardsWithPin(_ pin: String) {
+        guard let storedCards = self.storedEncryptedCards else {
+            passwordPicker?.didFinishDecryptingCards(success: false)
+            return
+        }
         if let decryptedCards = decryptCardsFrom(storedCards, with: pin) {
             self.cards = decryptedCards
             self.storedEncryptedCards = nil
             self.storedCardsState = .NoStoredCards
-            return true
+            passwordPicker?.didFinishDecryptingCards(success: true)
+            return
         }
-        return false
+        passwordPicker?.didFinishDecryptingCards(success: false)
     }
     
     private func getUserCardsConfiguration() -> CardsConfiguration {
