@@ -14,11 +14,7 @@ func generateSequenceKey() -> SymmetricKey{
     return SymmetricKey(size: keySize)
 }
 
-func cypherCounter(using key: SymmetricKey) {
-    
-}
-
-func get128bitCounterDataFrom(_ value: UInt) -> Data {
+func get128bitCounterDataFrom(_ value: UInt128) -> Data {
     var counter = String(value, radix: 2)
     
     while counter.count < 128 {
@@ -41,7 +37,7 @@ func getKeyFromBase64String(_ base64Key: String) -> SymmetricKey? {
 }
 
 
-func decryptCardsFrom(_ base64Cards: String, with pin: String) -> [[String: [String]]]? {
+func decryptCardsFrom(_ base64Cards: String, with pin: String) -> [Card]? {
     guard let pinData = pin.data(using: .utf8) else { return nil}
     
     let hashedPin = SHA256.hash(data: pinData)
