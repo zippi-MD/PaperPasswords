@@ -77,13 +77,13 @@
                                     </preferredSymbolConfiguration>
                                 </state>
                                 <connections>
-                                    <segue destination="Yas-sK-1m4" kind="presentation" id="Fvr-di-ZVL"/>
+                                    <segue destination="Yas-sK-1m4" kind="presentation" identifier="toGenerateCards" id="Fvr-di-ZVL"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5p-ek-Gyq">
-                                <rect key="frame" x="20" y="52" width="64" height="39"/>
+                                <rect key="frame" x="20" y="52" width="137" height="39"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Save / Restore"/>
                                 <connections>
                                     <action selector="saveRestoreButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8mP-nH-9wi"/>
                                 </connections>
@@ -319,6 +319,7 @@
                     <navigationItem key="navigationItem" id="1FD-qj-9Oe"/>
                     <size key="freeformSize" width="600" height="1000"/>
                     <connections>
+                        <outlet property="backgroundScrollView" destination="yGI-0F-rPZ" id="ptR-IU-YPq"/>
                         <outlet property="generateCardsButton" destination="Kk1-MX-Ckd" id="UP3-hJ-mjL"/>
                         <outlet property="generateSequenceKeyButton" destination="Mei-fj-sX2" id="9ZT-ZH-PVx"/>
                         <outlet property="numberOfCardsLabel" destination="95B-6I-y4r" id="jB0-6F-MbV"/>
@@ -327,6 +328,7 @@
                         <outlet property="passwordLength" destination="kDT-uf-s5M" id="6Hf-LL-mtj"/>
                         <outlet property="passwordLengthStepper" destination="xRM-4Q-wnR" id="Hzv-N9-uwU"/>
                         <outlet property="sequenceKeyLabel" destination="ZGu-Wj-KGE" id="5HA-A1-2q3"/>
+                        <outlet property="setSuggestedCharacterSetButton" destination="rfe-1g-JNc" id="ZVU-hF-rSa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TP3-jT-d76" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
