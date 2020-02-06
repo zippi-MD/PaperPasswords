@@ -36,5 +36,5 @@ After generating some cards and closing the application, the next time you open 
 
 Selecting the first option (*Decrypt*) will allow you to restore the previously stored cards, to do this you must introduce the *pin* you used to store them. 
 
-![](/ReadmeAssets/RestorePasswords.gif)
+![](ReadmeAssets/RestorePasswords.gif)
         
