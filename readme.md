@@ -22,14 +22,26 @@ This is a small aplicación developed to show an implementation of  *prefect pap
 
  - ### Generating passwords
  On first opening of the application you will be prompted with an alert telling you to *generate some passwords*. After selecting this option, you will be presented with a *modal screen* where you can modify the different parameters and generate your passwords.
+ 
+ ![](ReadmeAssets/GeneratePasswords.gif)
+
+
 
 - ### Selecting a password
 After generating your passwords the modal screen will be automatically dismissed and you will be presented with the main interface. On this screen you’ll be able to select the card, row and column for the desired password and visualize it.
+
+![](ReadmeAssets/SelectingPassword.gif)
+
+
 
 - ### Storing passwords 
 After generating some passwords you can store them using a pin, so you can visualize the same passwords after you close the application.
 
 To store your cards you must tap the button on the top left corner of the *pick password* screen, this will present an *alert* where you can introduce a pin to securely store your cards.
+
+![](ReadmeAssets/SavePasswords.gif)
+
+
 
 - ### Restoring passwords
 After generating some cards and closing the application, the next time you open it you’ll be prompted with an alert with two options. 
