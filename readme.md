@@ -14,7 +14,7 @@ This is a small aplicación developed to show an implementation of  *prefect pap
 
  - Using *git*, clone the repository from the following url: https://github.com/zippi-MD/PaperPasswords.git
  - In your local repository, make sure you’re in the *master branch* by running `git checkout master` on the local repository directory.
- - Open the ** file using Xcode 11.3 or above.
+ - Open *PPP-Crypto-Proyect.xcodeproj* file using Xcode 11.3 or above.
  - Build the application using Swift 5.1.
  - Run the application on an iOS simulator or device with iOS 13.1 or above (iPhone 11 is recommended).
 
